@@ -1,0 +1,11 @@
+name: Blastchant
+version: '${project.version}'
+main: saber.blastchant.Blastchant
+api-version: 1.15
+commands:
+  blastchant:
+    description: Adds blast to held pic
+permissions:
+  blastchant.add:
+    description: can add blastchant
+    default: op
