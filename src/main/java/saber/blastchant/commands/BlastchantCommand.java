@@ -46,6 +46,12 @@ public class BlastchantCommand implements CommandExecutor {
             commandSender.sendMessage("argument must be number");
             return true;
         }
+
+        if (num < 0){
+            commandSender.sendMessage("Number must be positive");
+            return true;
+        }
+
         Player play = (Player) commandSender;
 
         ItemStack item = play.getInventory().getItemInMainHand();
@@ -53,9 +59,10 @@ public class BlastchantCommand implements CommandExecutor {
         List<String> temp = new ArrayList<>();
         if (meta.getLore() != null) for (String x : meta.getLore())if (!x.contains(plugin.name)) temp.add(x);
 
-        temp.add(plugin.name + num);
+        if (num > 0) temp.add(plugin.name + num);
         meta.setLore(temp);
-        meta.getPersistentDataContainer().set(key, PersistentDataType.INTEGER, num);
+        if (num > 0) meta.getPersistentDataContainer().set(key, PersistentDataType.INTEGER, num);
+        else meta.getPersistentDataContainer().remove(key);
         item.setItemMeta(meta);
         play.getInventory().setItemInMainHand(item);
 
