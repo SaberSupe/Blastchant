@@ -1,5 +1,6 @@
 package saber.blastchant.commands;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.NamespacedKey;
 import org.bukkit.command.Command;
@@ -35,6 +36,13 @@ public class BlastchantCommand implements CommandExecutor {
             commandSender.sendMessage("Must be player");
             return true;
         }
+        Player play = (Player) commandSender;
+
+        if (play.getInventory().getItemInMainHand().getAmount() == 0){
+            play.sendMessage("Must be holding enchantable item");
+            return true;
+        }
+
         if (strings.length == 0) {
             commandSender.sendMessage("must have number argument");
             return true;
@@ -52,7 +60,7 @@ public class BlastchantCommand implements CommandExecutor {
             return true;
         }
 
-        Player play = (Player) commandSender;
+
 
         ItemStack item = play.getInventory().getItemInMainHand();
         ItemMeta meta = item.getItemMeta();

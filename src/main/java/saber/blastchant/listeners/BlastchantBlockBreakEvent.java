@@ -23,6 +23,7 @@ public class BlastchantBlockBreakEvent implements Listener {
     @EventHandler
     public void onBlockBreak(BlockBreakEvent event){
         Player play = event.getPlayer();
+        if (event.getPlayer().getInventory().getItemInMainHand().getAmount() == 0) return;
         PersistentDataContainer container = play.getInventory().getItemInMainHand().getItemMeta().getPersistentDataContainer();
         if (!container.has(key, PersistentDataType.INTEGER)) return;
         Integer blastnum = container.get(key,PersistentDataType.INTEGER);
